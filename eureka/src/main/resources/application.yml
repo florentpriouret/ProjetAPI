@@ -1,0 +1,9 @@
+server:
+  # Set discovery server port.
+  port: 8761
+eureka:
+  client:
+    # We only have one eureka server. Do not let it try to search for peers.
+    register-with-eureka: false
+    # We don't need to get information from eureka server.
+    fetch-registry: false

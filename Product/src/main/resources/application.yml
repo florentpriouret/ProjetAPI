@@ -1,0 +1,22 @@
+server:
+  port: 8082
+keycloak:
+  #URL du serveur keycloak sur lequel notre application doit se connecter.
+  auth-server-url: http://localhost:8081/auth
+  #Realm dédié a notre application
+  realm: Projet
+  #Nom du client tel que défini dans keycloak
+  resource: product
+  #Permet à notre application de se connecter sans authentification.
+  public-client: true
+  #Défini le nom d'utilisateur keycloak comme nom de principal dans spring.
+  principal-attribute: preferred_username
+
+  enable-basic-auth: true
+spring:
+  application:
+    name: product
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
