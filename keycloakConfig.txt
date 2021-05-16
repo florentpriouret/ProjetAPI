@@ -1,0 +1,9 @@
+realm:Projet
+
+Clients:
+-front
+	Valid Redirect URIs : access-type:public
+	http://localhost : 8080/*
+
+-product 
+	access-type : bearer-only
