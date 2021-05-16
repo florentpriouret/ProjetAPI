@@ -15,46 +15,46 @@ import java.util.Optional;
 @Service
 public class ProductService {
     /**
-     * The book repository used to request database.
+     * The product repository used to request database.
      */
     private final ProductRepository productRepository;
 
     /**
      * Create a constructor with beans injected by spring as parameter
-     * @param productRepository The repository of books to be injected by spring.
+     * @param productRepository The repository of products to be injected by spring.
      */
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
     /**
-     * Create a book object and persist it.
+     * Create a product object and persist it.
      *
-     * @param product The book to add to catalog.
-     * @return The created book enhanced with a new id.
+     * @param product The product to add to catalog.
+     * @return The created product enhanced with a new id.
      */
-    public Product createBook(@RequestBody Product product) {
+    public Product createProduct(@RequestBody Product product) {
         return productRepository.save(product);
     }
 
     /**
-     * Get all BOKS.
+     * Get all PRODUCTS.
      *
-     * @return All the books found in database.
+     * @return All the products found in database.
      */
     public List<Product> getProducts(int page, int size, String sortDirection, String sort) {
         PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.fromString(sortDirection), sort);
 
-        Page<Product> books = productRepository
+        Page<Product> products = productRepository
                 .findAll(pageRequest);
-        return books.getContent();
+        return products.getContent();
     }
 
     /**
-     * Get a book by its id.
+     * Get a product by its id.
      *
-     * @param id The id of the book to get.
-     * @return The book found or an EntityNotFoundException.
+     * @param id The id of the product to get.
+     * @return The product found or an EntityNotFoundException.
      */
     public Product getProduct(Long id) {
         Optional<Product> productOpt = productRepository.findById(id);
@@ -63,25 +63,25 @@ public class ProductService {
     }
 
     /**
-     * Update a book by its id.
+     * Update a product by its id.
      *
      * @param product The new values to set.
-     * @param id   The id of the book to update.
-     * @return The updated book or entityNotFoundException when book cannot be found.
+     * @param id   The id of the product to update.
+     * @return The updated product or entityNotFoundException when product cannot be found.
      */
     public Product updateProduct(Long id, Product product) {
         Optional<Product> productOpt = productRepository.findById(id);
 
-        return productOpt.map(currentBook -> {
-            product.setId(currentBook.getId());
+        return productOpt.map(currentProduct -> {
+            product.setId(currentProduct.getId());
             return productRepository.save(product);
         }).orElseThrow(EntityNotFoundException::new);
     }
 
     /**
-     * Delete a book by its id.
+     * Delete a product by its id.
      *
-     * @param id The id of the book to delete.
+     * @param id The id of the product to delete.
      */
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);

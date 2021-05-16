@@ -4,61 +4,61 @@ import java.util.Date;
 
 public class UnidentifiedProductDto {
     /**
-     * The title of the book.
+     * The name of the product.
      */
     private String name;
     /**
-     * The author of the book.
+     * The consumption date of the product.
      */
     private Date consumptionDate;
     /**
-     * The date of publication of the book.
+     * The usage description of the product.
      */
     private String usageDescription;
 
     /**
-     * Get the title of the book.
-     * @return The title of the book.
+     * Get the name of the product.
+     * @return The name of the product.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Set the title of the book;
-     * @param name The title of the book.
+     * Set the name of the product;
+     * @param name The name of the product.
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * Get the author of the book.
-     * @return The author of the book.
+     * Get the consumption Date of the product.
+     * @return The consumption Date of the product.
      */
     public Date getConsumptionDate() {
         return consumptionDate;
     }
 
     /**
-     * Set the author of the book.
-     * @param consumptionDate The author of the book.
+     * Set the consumptionDate of the product.
+     * @param consumptionDate The consumptionDate of the product.
      */
     public void setConsumptionDate(Date consumptionDate) {
         this.consumptionDate = consumptionDate;
     }
 
     /**
-     * Get the date of publication of the book.
-     * @return The date of publication of the book.
+     * Get the usage Description of the product.
+     * @return The usage Description of the product.
      */
     public String getUsageDescription() {
         return usageDescription;
     }
 
     /**
-     * Set the date of publication of the book.
-     * @param usageDescription The date of publication of the book.
+     * Set the usage Description of the product.
+     * @param usageDescription The usage Description of the product.
      */
     public void setUsageDescription(String usageDescription) {
         this.usageDescription = usageDescription;

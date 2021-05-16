@@ -23,7 +23,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping(path = "/products", produces = APPLICATION_JSON_VALUE)
 public class ProductController {
     /**
-     * Repository used to request the book table.
+     * Repository used to request the product table.
      */
     private final ProductService productService;
 
@@ -44,42 +44,42 @@ public class ProductController {
     }
 
     /**
-     * Create a book object and persist it.
+     * Create a product object and persist it.
      *
-     * @param productDto The book to add to catalog.
-     * @return The created book enhanced with a new id.
+     * @param productDto The product to add to catalog.
+     * @return The created product enhanced with a new id.
      */
     @PostMapping(path = "/", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public ProductDto createProduct(@RequestBody UnidentifiedProductDto productDto) {
 
         Product product = toEntity(productDto);
-        Product productCreated = productService.createBook(product);
+        Product productCreated = productService.createProduct(product);
         return toDto(productCreated);
     }
 
     /**
-     * Get all books.
+     * Get all products.
      *
-     * @return All the books found in database.
+     * @return All the products found in database.
      */
     @GetMapping(path = "/", produces = APPLICATION_JSON_VALUE)
-    public List<ProductDto> getBooks(int page, int size, String sortDirection, String sort) {
+    public List<ProductDto> getProducts(int page, int size, String sortDirection, String sort) {
 
-        List<Product> books = productService.getProducts(page, size, sortDirection, sort);
-        return books
+        List<Product> products = productService.getProducts(page, size, sortDirection, sort);
+        return products
                 .stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
     /**
-     * Get all books.
+     * Get all products.
      *
-     * @return All the books found in database.
+     * @return All the products found in database.
      */
     @GetMapping(path = "/all", produces = APPLICATION_JSON_VALUE)
-    public List<ProductDto> getBooks() {
+    public List<ProductDto> getProducts() {
 
         List<Product> products = productService.getProducts(5, 5, "ASC", "name");
         return products
@@ -89,10 +89,10 @@ public class ProductController {
     }
 
     /**
-     * Get a book by its id.
+     * Get a product by its id.
      *
-     * @param id The id of the book to get.
-     * @return The book found or an EntityNotFoundException.
+     * @param id The id of the product to get.
+     * @return The product found or an EntityNotFoundException.
      */
     @GetMapping(path = "/{id}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ProductDto getProduct(@PathVariable("id") Long id) {
@@ -102,25 +102,25 @@ public class ProductController {
     }
 
     /**
-     * Update a book by its id.
+     * Update a product by its id.
      *
      * @param productDto The new values to set.
-     * @param id      The id of the book to update.
-     * @return The updated book or entityNotFoundException when book cannot be found.
+     * @param id      The id of the product to update.
+     * @return The updated product or entityNotFoundException when product cannot be found.
      */
     @PutMapping(path = "/{id}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ProductDto updateProduct(@PathVariable("id") Long id, @RequestBody UnidentifiedProductDto productDto) {
 
-        Product book = toEntity(productDto);
-        Product bookUpdated = productService.updateProduct(id, book);
+        Product product = toEntity(productDto);
+        Product productUpdated = productService.updateProduct(id, product);
 
-        return toDto(bookUpdated);
+        return toDto(productUpdated);
     }
 
     /**
-     * Delete a book by its id.
+     * Delete a product by its id.
      *
-     * @param id The id of the book to delete.
+     * @param id The id of the product to delete.
      */
     @DeleteMapping("/{id}")
     public void deleteProduct(@PathVariable Long id) {
@@ -129,18 +129,18 @@ public class ProductController {
     }
 
     /**
-     * Convert an unidentified book DTO to a book entity.
-     * @param unidentifiedProductDto The unidentified book DTO.
-     * @return The book entity.
+     * Convert an unidentified product DTO to a product entity.
+     * @param unidentifiedProductDto The unidentified product DTO.
+     * @return The product entity.
      */
     private Product toEntity(UnidentifiedProductDto unidentifiedProductDto) {
         return modelMapper.map(unidentifiedProductDto, Product.class);
     }
 
     /**
-     * Convert a book entity to an identified book DTO.
+     * Convert a product entity to an identified product DTO.
      * @param product The product entity.
-     * @return The identified book DTO.
+     * @return The identified product DTO.
      */
     private ProductDto toDto(Product product) {
         return modelMapper.map(product, ProductDto.class);
